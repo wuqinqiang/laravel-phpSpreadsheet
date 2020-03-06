@@ -1,9 +1,9 @@
 {
-    "name": "remember/laravel-phpspreadsheet",
+    "name": "remember/laravel-phpSpreadsheet",
     "description": "Based on phpoffice/phpSpreadsheet package in laravel, let developers get started faster",
     "keywords": [
         "remember",
-        "laravel-phpspreadsheet"
+        "laravel-phpSpreadsheet"
     ],
     "homepage": "https://github.com/remember/laravel-phpspreadsheet",
     "license": "MIT",
