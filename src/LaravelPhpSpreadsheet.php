@@ -84,9 +84,11 @@ class LaravelPhpSpreadsheet
         };
         $sheet = $this->init($param);
         $row = 2;
-        $line = 1;
-        collect($data)->map(function ($res) use (&$line, &$row, &$sheet) {
-            $sheet->setCellValueByColumnAndRow($line, $row, $res['name']);
+        collect($data)->map(function ($res) use (&$row, &$sheet) {
+            for ($i = 0; $i < count($res); $i++) {
+                $sheet->setCellValueByColumnAndRow($i + 1, $row, $res[$i]);
+            }
+            $row++;
         });
 
         return $sheet;
