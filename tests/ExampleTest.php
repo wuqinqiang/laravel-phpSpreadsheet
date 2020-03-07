@@ -18,4 +18,9 @@ class ExampleTest extends TestCase
     {
         $this->assertTrue(true);
     }
+
+    public function testIstrue()
+    {
+        return true;
+    }
 }

@@ -2,6 +2,7 @@
 
 namespace Remember\LaravelPhpSpreadsheet;
 
+use Illuminate\Support\Facades\Storage;
 use PhpOffice\PhpSpreadsheet\IOFactory;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
@@ -26,19 +27,18 @@ class LaravelPhpSpreadsheet
 
     /**
      * @param $param
+     * @return \PhpOffice\PhpSpreadsheet\Worksheet\Worksheet
      * @throws \PhpOffice\PhpSpreadsheet\Exception
-     * 初始化一些参数
+     * initialize cell style ,setTitle ,default width
      */
     public function init($param)
     {
-        //设置格式(默认水平垂直居中)
         $this->spreadsheet->getDefaultStyle()->applyFromArray($this->alignmentConfig());
-        //设置样式
         $sheet = $this->spreadsheet->getActiveSheet();
         $this->setStyle($sheet);
-
         $sheet->setTitle(config("laravel-phpSpreadsheet.columns.$param.title"));
         $sheet->getDefaultColumnDimension()->setWidth(config("laravel-phpSpreadsheet.style.width"));
+        $this->setExtraWidth($sheet);
         $startRow = $this->getStartRow();
         $startLine = $this->getStartLine();
         $lineNames = config("laravel-phpSpreadsheet.columns.$param.lineName");
@@ -46,11 +46,14 @@ class LaravelPhpSpreadsheet
             $sheet->setCellValueByColumnAndRow($startLine, $startRow, $name);
             $startLine++;
         });
-
         return $sheet;
     }
 
 
+    /**
+     * @param $sheet
+     * set default style
+     */
     public function setStyle($sheet)
     {
         $cells = $this->getDefaultStyle();
@@ -60,29 +63,33 @@ class LaravelPhpSpreadsheet
     }
 
 
+    /**
+     * save the file then return file url
+     */
     public function saveFile($param, array $data)
     {
         $this->makeSheet($param, $data);
         $writer = new Xlsx($this->spreadsheet);
-        $file_name = date('Y-m-d', time()) . rand(1000, 9999);
-        $file_name = '../' . $file_name . ".xlsx";
-        $writer->save($file_name);
+        $file_name = config("laravel-phpSpreadsheet.columns.$param.fileName") . ".xlsx";
+        $file = config('filesystems.disks.public.root') . '/' . $file_name;
+        $writer->save($file);
         $this->disconnect();
+        return Storage::disk('public')->url($file_name);
     }
 
+    /**
+     * download file
+     */
     public function downloadFile($param, array $data)
     {
         $this->makeSheet($param, $data);
-        $fileName = '01simple.xlsx';
 
         $file_name = date('Y-m-d', time()) . rand(1000, 9999);
-//第二种直接页面上显示下载
         $file_name = $file_name . ".xlsx";
         header('Content-Type: application/vnd.ms-excel');
         header('Content-Disposition: attachment;filename="' . $file_name . '"');
         header('Cache-Control: max-age=0');
         $writer = IOFactory::createWriter($this->spreadsheet, 'Xlsx');
-//注意createWriter($spreadsheet, 'Xls') 第二个参数首字母必须大写
         $writer->save('php://output');
         $this->disconnect();
         exit();
@@ -102,7 +109,7 @@ class LaravelPhpSpreadsheet
     public function makeSheet(string $param, array $data)
     {
         if (false === $this->hasParam($param)) {
-            throw new InvalidArgumentException('配置文件中不存在此参数');
+            throw new InvalidArgumentException("the $param is not in columns");
         };
         $sheet = $this->init($param);
         $row = $this->getStartRow() + 1;
@@ -117,34 +124,20 @@ class LaravelPhpSpreadsheet
     }
 
     /**
-     * 设置字体区间的字体
+     * set some column width
      */
-    public static function setFontCell($sheet, string $cell)
+    public function setExtraWidth($sheet)
     {
-        $sheet->getStyle($cell)->getFont()
-            ->setBold(true)->setName('Arial');
-        return $sheet;
-    }
-
-
-    /**
-     * 设置宽度 默认 8
-     * 有些单元格要长一点额外设置
-     */
-    public static function setWidth($sheet)
-    {
-        //需要额外定长的宽
-        $sheet->getColumnDimension('A')->setWidth(25);
-        $sheet->getColumnDimension('B')->setWidth(40);
-        $sheet->getColumnDimension('C')->setWidth(20);
-        $sheet->getColumnDimension('G')->setWidth(20);
-        $sheet->getColumnDimension('H')->setWidth(40);
+        $extras = config('laravel-phpSpreadsheet.style.extra-width');
+        foreach ($extras as $key => $extra) {
+            $sheet->getColumnDimension($key)->setWidth($extra);
+        }
         return $sheet;
     }
 
     /**
      * @return array
-     * 水平垂直居中配置
+     * Horizontal and vertical are position
      */
     public function alignmentConfig(): array
     {

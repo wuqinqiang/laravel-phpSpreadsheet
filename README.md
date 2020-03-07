@@ -1,19 +1,26 @@
-# Very short description of the package
+# Laravel中通过PhpSpreadsheet包快速生成 xls 文件
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/remember/laravel-phpspreadsheet.svg?style=flat-square)](https://packagist.org/packages/remember/laravel-phpspreadsheet)
 [![Build Status](https://img.shields.io/travis/remember/laravel-phpspreadsheet/master.svg?style=flat-square)](https://travis-ci.org/remember/laravel-phpspreadsheet)
 [![Quality Score](https://img.shields.io/scrutinizer/g/remember/laravel-phpspreadsheet.svg?style=flat-square)](https://scrutinizer-ci.com/g/remember/laravel-phpspreadsheet)
-[![Total Downloads](https://img.shields.io/packagist/dt/remember/laravel-phpspreadsheet.svg?style=flat-square)](https://packagist.org/packages/remember/laravel-phpspreadsheet)
+[![Total Downloads](https://img.shxields.io/packagist/dt/remember/laravel-phpspreadsheet.svg?style=flat-square)](https://packagist.org/packages/remember/laravel-phpspreadsheet)
 
-This is where your description should go. Try and limit it to a paragraph or two, and maybe throw in a mention of what PSRs you support to avoid any confusion with users and contributors.
+开发这个扩展的原因是业务上经常会有把数据生成特定xlsx格式导出,根据日常开发的一些需求特点,集成一些功能,争取通过最少的配置来实现需求,而不需要去看对应的  PhpSpreadsheet 包文档
 
-## Installation
+### 环境
 
-You can install the package via composer:
+```php
+php >7.1
+Laravel 版本 6.*
+```
+
+## 安装(如碰到缺少扩展的,请对应先安装扩展)
 
 ```bash
-composer require remember/laravel-phpspreadsheet
+composer require remember/laravel-spreadsheet
 ```
+
+
 
 ## Usage
 
