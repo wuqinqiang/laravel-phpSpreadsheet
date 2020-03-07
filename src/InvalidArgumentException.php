@@ -1,7 +1,7 @@
 <?php
-
 namespace Remember\LaravelPhpSpreadsheet;
-class OperationException extends Exception
+class InvalidArgumentException extends \Exception
+
 {
 
 }

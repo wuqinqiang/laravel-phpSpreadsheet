@@ -10,9 +10,9 @@ class LaravelPhpSpreadsheet
 {
     protected $spreadsheet;
 
-    public function __construct()
+    public function __construct(Spreadsheet $spreadsheet)
     {
-        $this->spreadsheet = new Spreadsheet();
+        $this->spreadsheet = $spreadsheet;
     }
 
     /**
@@ -31,21 +31,32 @@ class LaravelPhpSpreadsheet
      */
     public function init($param)
     {
-        //设置默认全局垂直水平居中
+        //设置格式(默认水平垂直居中)
         $this->spreadsheet->getDefaultStyle()->applyFromArray($this->alignmentConfig());
+        //设置样式
         $sheet = $this->spreadsheet->getActiveSheet();
+        $this->setStyle($sheet);
+
         $sheet->setTitle(config("laravel-phpSpreadsheet.columns.$param.title"));
-
-        $linNames = config("laravel-phpSpreadsheet.columns.$param.lineName");
-        $line = 1;
-
-        collect($linNames)->map(function ($name) use (&$sheet, &$line) {
-            $sheet->setCellValueByColumnAndRow($line, 1, $name);
-            // $sheet->getColumnDimensionByColumn()->setAutoSize();
-            $line++;
+        $sheet->getDefaultColumnDimension()->setWidth(config("laravel-phpSpreadsheet.style.width"));
+        $startRow = $this->getStartRow();
+        $startLine = $this->getStartLine();
+        $lineNames = config("laravel-phpSpreadsheet.columns.$param.lineName");
+        collect($lineNames)->map(function ($name) use (&$sheet, &$startRow, &$startLine) {
+            $sheet->setCellValueByColumnAndRow($startLine, $startRow, $name);
+            $startLine++;
         });
 
         return $sheet;
+    }
+
+
+    public function setStyle($sheet)
+    {
+        $cells = $this->getDefaultStyle();
+        foreach ($cells as $key => $cell) {
+            $sheet->getStyle($key)->applyFromArray($cell);
+        }
     }
 
 
@@ -56,7 +67,7 @@ class LaravelPhpSpreadsheet
         $file_name = date('Y-m-d', time()) . rand(1000, 9999);
         $file_name = '../' . $file_name . ".xlsx";
         $writer->save($file_name);
-
+        $this->disconnect();
     }
 
     public function downloadFile($param, array $data)
@@ -73,20 +84,31 @@ class LaravelPhpSpreadsheet
         $writer = IOFactory::createWriter($this->spreadsheet, 'Xlsx');
 //注意createWriter($spreadsheet, 'Xls') 第二个参数首字母必须大写
         $writer->save('php://output');
+        $this->disconnect();
         exit();
+    }
+
+
+    /**
+     * 清除
+     */
+    public function disconnect()
+    {
+        $this->spreadsheet->disconnectWorksheets();
+        unset($this->spreadsheet);
     }
 
 
     public function makeSheet(string $param, array $data)
     {
         if (false === $this->hasParam($param)) {
-            echo 1111;
+            throw new InvalidArgumentException('配置文件中不存在此参数');
         };
         $sheet = $this->init($param);
-        $row = 2;
+        $row = $this->getStartRow() + 1;
         collect($data)->map(function ($res) use (&$row, &$sheet) {
             for ($i = 0; $i < count($res); $i++) {
-                $sheet->setCellValueByColumnAndRow($i + 1, $row, $res[$i]);
+                $sheet->setCellValueByColumnAndRow($this->getStartLine() + $i, $row, $res[$i]);
             }
             $row++;
         });
@@ -103,6 +125,7 @@ class LaravelPhpSpreadsheet
             ->setBold(true)->setName('Arial');
         return $sheet;
     }
+
 
     /**
      * 设置宽度 默认 8
@@ -125,8 +148,23 @@ class LaravelPhpSpreadsheet
      */
     public function alignmentConfig(): array
     {
-        return [
-            config('laravel-phpSpreadsheet.alignment')
-        ];
+        return config('laravel-phpSpreadsheet.style.format');
     }
+
+
+    public function getStartLine(): int
+    {
+        return config("laravel-phpSpreadsheet.startLine") > 0 ? config("laravel-phpSpreadsheet.startLine") : 1;
+    }
+
+    public function getStartRow(): int
+    {
+        return config("laravel-phpSpreadsheet.startRow") > 0 ? config("laravel-phpSpreadsheet.startRow") : 1;
+    }
+
+    public function getDefaultStyle(): array
+    {
+        return config('laravel-phpSpreadsheet.style.border');
+    }
+
 }
