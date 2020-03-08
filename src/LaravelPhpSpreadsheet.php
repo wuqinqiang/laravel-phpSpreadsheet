@@ -75,9 +75,11 @@ class LaravelPhpSpreadsheet
         $sheet->setTitle(config("laravel-phpSpreadsheet.columns.$param.title"));
         $sheet->getDefaultColumnDimension()->setWidth(config("laravel-phpSpreadsheet.style.width") ?? 10);
         $this->setExtraWidth($sheet);
+
         $startRow = $this->getStartRow();
         $startLine = $this->getStartLine();
         $lineNames = config("laravel-phpSpreadsheet.columns.$param.lineName");
+
         collect($lineNames)->map(function ($name) use (&$sheet, &$startRow, &$startLine) {
             $sheet->setCellValueByColumnAndRow($startLine, $startRow, $name);
             $startLine++;
@@ -108,6 +110,16 @@ class LaravelPhpSpreadsheet
     public function saveFile($param, array $data)
     {
         $this->makeSheet($param, $data);
+        return $this->saveLocal($param);
+    }
+
+
+    /**
+     * @return mixed
+     * @throws \PhpOffice\PhpSpreadsheet\Writer\Exception
+     */
+    public function saveLocal($param)
+    {
         $writer = new Xlsx($this->spreadsheet);
         $file_name = $this->getFileName($param);
         $file = config('filesystems.disks.public.root') . '/' . $file_name;
@@ -122,6 +134,15 @@ class LaravelPhpSpreadsheet
     public function downloadFile($param, array $data)
     {
         $this->makeSheet($param, $data);
+        $this->downForBrowser($param);
+    }
+
+    /**
+     * @param $param
+     * @throws \PhpOffice\PhpSpreadsheet\Writer\Exception
+     */
+    public function downForBrowser($param)
+    {
         $file_name = $this->getFileName($param) . ".xlsx";
         header('Content-Type: application/vnd.ms-excel');
         header('Content-Disposition: attachment;filename="' . $file_name . '"');
