@@ -5,7 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="549e1e75-0035-4cfd-b1c8-722f58cc0560" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/src/LaravelPhpSpreadsheet.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/LaravelPhpSpreadsheet.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -21,28 +21,25 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/LaravelPhpSpreadsheet.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="5852">
+            <state relative-caret-position="2948">
               <caret line="230" selection-start-line="230" selection-end-line="230" />
-              <folding>
-                <element signature="e#50#89#0#PHP" expanded="true" />
-              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/README.md">
           <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
             <state split_layout="SPLIT">
-              <first_editor relative-caret-position="-287">
-                <caret line="106" selection-start-line="106" selection-end-line="114" selection-end-column="2" />
+              <first_editor relative-caret-position="507">
+                <caret line="123" column="18" lean-forward="true" selection-start-line="123" selection-start-column="18" selection-end-line="123" selection-end-column="18" />
               </first_editor>
               <second_editor />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/LaravelPhpSpreadsheetFacade.php">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="504">
@@ -54,7 +51,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/LaravelPhpSpreadsheetServiceProvider.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="154">
+            <state relative-caret-position="-228">
               <caret line="7" column="42" selection-start-line="7" selection-start-column="6" selection-end-line="7" selection-end-column="42" />
               <folding>
                 <element signature="e#50#89#0#PHP" expanded="true" />
@@ -86,8 +83,8 @@
         <option value="$PROJECT_DIR$/src/FileStorage.php" />
         <option value="$PROJECT_DIR$/src/LocalFileStorage.php" />
         <option value="$PROJECT_DIR$/tests/ExampleTest.php" />
-        <option value="$PROJECT_DIR$/src/LaravelPhpSpreadsheet.php" />
         <option value="$PROJECT_DIR$/config/config.php" />
+        <option value="$PROJECT_DIR$/src/LaravelPhpSpreadsheet.php" />
         <option value="$PROJECT_DIR$/README.md" />
       </list>
     </option>
@@ -267,15 +264,16 @@
       <workItem from="1583398181322" duration="6888000" />
       <workItem from="1583498216429" duration="17809000" />
       <workItem from="1583588490404" duration="1902000" />
-      <workItem from="1583668444194" duration="4888000" />
+      <workItem from="1583668444194" duration="5184000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="32924000" />
+    <option name="totallyTimeSpent" value="33220000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
+    <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.2653791" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -445,29 +443,16 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/README.md">
-      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
-        <state split_layout="SPLIT">
-          <first_editor relative-caret-position="-287">
-            <caret line="106" selection-start-line="106" selection-end-line="114" selection-end-column="2" />
-          </first_editor>
-          <second_editor />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/LaravelPhpSpreadsheet.php">
+    <entry file="file://$PROJECT_DIR$/src/LaravelPhpSpreadsheetFacade.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="5852">
-          <caret line="230" selection-start-line="230" selection-end-line="230" />
-          <folding>
-            <element signature="e#50#89#0#PHP" expanded="true" />
-          </folding>
+        <state relative-caret-position="504">
+          <caret line="18" column="25" selection-start-line="18" selection-start-column="25" selection-end-line="18" selection-end-column="25" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/LaravelPhpSpreadsheetServiceProvider.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="154">
+        <state relative-caret-position="-228">
           <caret line="7" column="42" selection-start-line="7" selection-start-column="6" selection-end-line="7" selection-end-column="42" />
           <folding>
             <element signature="e#50#89#0#PHP" expanded="true" />
@@ -475,10 +460,20 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/LaravelPhpSpreadsheetFacade.php">
+    <entry file="file://$PROJECT_DIR$/src/LaravelPhpSpreadsheet.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="504">
-          <caret line="18" column="25" selection-start-line="18" selection-start-column="25" selection-end-line="18" selection-end-column="25" />
+        <state relative-caret-position="2948">
+          <caret line="230" selection-start-line="230" selection-end-line="230" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="507">
+            <caret line="123" column="18" lean-forward="true" selection-start-line="123" selection-start-column="18" selection-end-line="123" selection-end-column="18" />
+          </first_editor>
+          <second_editor />
         </state>
       </provider>
     </entry>

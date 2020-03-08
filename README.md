@@ -104,15 +104,25 @@ return $path;
 If your data is taken from the database and the data is not easily populated into the specified column.You can just generate one shelf,then populate it yourself.
                                                                                                  
 ```php
-$users=User::all();
-$sheet=app('laravel-phpSpreadsheet')->init('student');
-$count = 2;
-collect($users)->map(function($user) use($sheet,&$count){
-  $sheet->setCellValue('A' . $count, $user->name);
-  .......
-  .......  balabala
-  $count++;
-})
+$data = [
+            ['name'=>'wuqinqiang', 'age'=>24, 'address'=>'QuZhou'],
+            ['name'=>'zhangsan', 'age'=>26, 'address'=>'HangZhou',],
+            ['name'=>'lisi', 'age'=>30, 'address'=>'ShenZhen'],
+        ];
+        $phpSpreadsheet=app('laravel-phpSpreadsheet');
+        $sheet= $phpSpreadsheet->init('student');
+        $sheet = app('laravel-phpSpreadsheet')->init('student');
+        $count=3;
+        collect($data)->map(function ($res) use ($sheet, &$count) {
+            $sheet->setCellValue('A' . $count, $res['name']);
+            $sheet->setCellValue('B' . $count, $res['age']);
+            $sheet->setCellValue('C' . $count, $res['address']);
+            $count++;
+        });
+        // save file
+       $file= $phpSpreadsheet->saveLocal('student');
+       // download
+      $phpSpreadsheet->downForBrowser('student');
 ```
 
 
