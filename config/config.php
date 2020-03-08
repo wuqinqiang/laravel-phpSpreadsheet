@@ -8,22 +8,14 @@ return [
     'startLine' => 1,
     //Generate the cell format
     'columns' => [
-        //demo
-//        'student' => [
-//            'fileName' => 'demo123'.time(),
-//            'title' => 'demo1',
-//            'lineName' => [
-//                '姓名', '年龄', '地址',
-//            ],
-//
-//        ],
-//        'teacher' => [
-//            'fileName' => 'demo456'.time(),
-//            'title' => 'demo2',
-//            'lineName' => [
-//                '姓名', '年龄', '爱好',
-//            ],
-//        ]
+        'student' => [
+            'fileName' => 'demo123' . time(),
+            'title' => 'demo1',
+            'lineName' => [
+                'name', 'age', 'address',
+            ],
+
+        ],
     ],
     'style' => [
         'format' => [
@@ -57,7 +49,6 @@ return [
                 ],
 
             ],
-
         ]
     ],
 
