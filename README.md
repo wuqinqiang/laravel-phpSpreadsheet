@@ -1,9 +1,4 @@
-# Quickly generate the specified XLS file in Laravel
-
-[![Latest Version on Packagist](https://img.shields.io/packagist/v/remember/laravel-phpspreadsheet.svg?style=flat-square)](https://packagist.org/packages/remember/laravel-phpspreadsheet)
-[![Build Status](https://img.shields.io/travis/remember/laravel-phpspreadsheet/master.svg?style=flat-square)](https://travis-ci.org/remember/laravel-phpspreadsheet)
-[![Quality Score](https://img.shields.io/scrutinizer/g/remember/laravel-phpspreadsheet.svg?style=flat-square)](https://scrutinizer-ci.com/g/remember/laravel-phpspreadsheet)
-[![Total Downloads](https://img.shxields.io/packagist/dt/remember/laravel-phpspreadsheet.svg?style=flat-square)](https://packagist.org/packages/remember/laravel-phpspreadsheet)
+# Quickly generate the specified xlsx file in Laravel
 
 The reason for the development of this extension is that the business will often generate data in a specific XLSX format export, according to the daily development of some requirements features.integration of general functions, to achieve the requirements through the minimum configuration, do not need to see the corresponding PhpSpreadsheet package documents.However, for some complex requirements, you still need to check the phpspreadsheet documentation.
 
@@ -13,6 +8,7 @@ The reason for the development of this extension is that the business will often
 ```php
 php >7.1
 Laravel  6.*
+phpoffice/phpspreadsheet ^1.11
 ```
 
 ## Installation
@@ -26,9 +22,10 @@ Publish configuration
 php artisan vendor:publish --provider="Remember\LaravelPhpSpreadsheet\LaravelPhpSpreadsheetServiceProvider"
 ```
 
-#### default config
-```php
+#### configuration file 
+config/laravel-phpSpreadsheet.php
 
+```php
 /*
  * You can place your custom package configuration in here.
  */
@@ -74,7 +71,7 @@ return [
                         // dashDot dashDotDot dashed dotted double hair medium';
                         // 'mediumDashDot mediumDashDotDot mediumDashed slantDashDot thick thin';
                         'borderStyle' => 'thick',
-                        'color' => ['argb' => '######'],
+                        'color' => ['argb' => 'FFFF0000'],
                     ],
                 ],
 

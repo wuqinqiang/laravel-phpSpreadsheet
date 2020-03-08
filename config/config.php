@@ -44,7 +44,7 @@ return [
                         // dashDot dashDotDot dashed dotted double hair medium';
                         // 'mediumDashDot mediumDashDotDot mediumDashed slantDashDot thick thin';
                         'borderStyle' => 'thick',
-                        'color' => ['argb' => '######'],
+                        'color' => ['argb' => 'FFFF0000'],
                     ],
                 ],
 
