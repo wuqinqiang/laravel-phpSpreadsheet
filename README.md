@@ -49,7 +49,7 @@ return [
             //Default horizontal vertical center
             'alignment' => [
                 /**
-                 * you can set: left right center centerContinuous justify fill
+                 * you can set: left、right、 center、 centerContinuous、 justify、 fill
                  */
                 'horizontal' => 'center',
                 'vertical' => 'center',
